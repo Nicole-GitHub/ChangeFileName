@@ -19,7 +19,8 @@ public class ChangeFileNameBat {
 			List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();
 			Map<String, String> map = new HashMap<String, String>();
 
-			String[] txtArr = Tools.readFileContent(outputPath + "ChangeFileNameBat.txt").split("\r\n");
+			String[] txtArr = Tools.readFileContent(outputPath + "ChangeFileNameBat.txt")
+					.replace("\r", "").split("\r\n");
 			for (String str : txtArr) {
 //System.out.println(str);
 				if (str != null && str.length() > 3 && str.contains(":")) {
