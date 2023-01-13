@@ -14,12 +14,13 @@ public class Main {
 
 		String changeType = "", folderName = "";
 		String path = System.getProperty("user.dir") + File.separator; // Jar
-		if(!isStartupFromJar) // IDE
+		if(!isStartupFromJar) { // IDE
 			path = System.getProperty("os.name").contains("Mac") ? "/Users/nicole/Downloads/" // Mac
 //					: "D:/Downloads/"; // Win
 					:"C:/Users/nicole_tsou/Downloads/"; // Win
 			changeType = "1";
 			folderName = "";
+		}
 		
 		/**
 		 * 透過windows的cmd執行時需將System.in格式轉為big5才不會讓中文變亂碼
