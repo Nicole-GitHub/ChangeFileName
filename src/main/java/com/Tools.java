@@ -70,14 +70,20 @@ public class Tools {
 	 */
 	protected static String getCellValue(Row row, int cellnum, String fieldName) throws Exception {
 		try {
-			if (!Tools.cellNotBlank(row.getCell(cellnum))) {
+			Cell cell = row.getCell(cellnum);
+			if (!cellNotBlank(cell))
 				return "";
-			} else if (row.getCell(cellnum).getCellType() == Cell.CELL_TYPE_NUMERIC) {
-				return String.valueOf((int) row.getCell(cellnum).getNumericCellValue()).trim();
-			} else if (row.getCell(cellnum).getCellType() == Cell.CELL_TYPE_STRING
-					|| row.getCell(cellnum).getCellType() == Cell.CELL_TYPE_FORMULA) {
-				return row.getCell(cellnum).getStringCellValue().trim();
-			} 
+			else if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC)
+				return String.valueOf((int) cell.getNumericCellValue()).trim();
+			else if (cell.getCellType() == Cell.CELL_TYPE_STRING)
+				return cell.getStringCellValue().trim();
+			else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
+				if (cell.getCachedFormulaResultType() == Cell.CELL_TYPE_NUMERIC)
+					return String.valueOf((int) cell.getNumericCellValue()).trim();
+				else if (cell.getCellType() == Cell.CELL_TYPE_STRING)
+					return cell.getStringCellValue().trim();
+			}
+		
 		} catch (Exception ex) {
 			throw new Exception(className + " getCellValue " + fieldName + " 格式錯誤");
 		}
